@@ -1,0 +1,106 @@
+<%- include("partials/header") %>
+
+<h1>enter new user</h1>
+
+<form action="/addUser" method="post">
+  <div class="form-group">
+    <label>Full name</label>
+    <input type="text" class="form-control" name="userName" required />
+  </div>
+
+  <div class="form-group">
+    <label>id number</label>
+    <input
+      type="text"
+      class="form-control"
+      name="userId"
+      type="number"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label>address</label>
+    <input type="text" id="" name="city" placeholder="city" required />
+    <input type="text" id="" name="street" placeholder="street" required />
+    <input type="number" name="numberHome" placeholder="home number" required />
+  </div>
+
+  <div class="form-group">
+    <label>date of birth</label>
+    <input type="date" name="birthDate" required />
+  </div>
+
+  <div class="form-group">
+    <label>Phone</label>
+    <input
+      type="text"
+      class="form-control"
+      name="phone"
+      placeholder="00-000000 / 000-0000000"
+    />
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Cell phone</label>
+    <input
+      type="text"
+      class="form-control"
+      name="cellPhone"
+      placeholder="000-0000000 / 000-0000000"
+      required
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Date of first vaccination:</label>
+    <input type="date" name="DateVfvaccination1" />
+    <label>manufacturer of first vaccination: </label>
+    <select name="manufacturer1">
+      <option value="a">a</option>
+      <option value="b">b</option>
+      <option value="c">c</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Date of second vaccination: </label>
+    <input type="date" name="DateVfvaccination2" />
+    <label>manufacturer of second vaccination: </label>
+    <select name="manufacturer2">
+      <option value="a">a</option>
+      <option value="b">b</option>
+      <option value="c">c</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Date of third vaccination: </label>
+    <input type="date" name="DateVfvaccination3" />
+    <label>manufacturer of third vaccination: </label>
+    <select name="manufacturer3">
+      <option value="a">a</option>
+      <option value="b">b</option>
+      <option value="c">c</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Date of fourth vaccination: </label>
+    <input type="date" name="DateVfvaccination4" />
+    <label>manufacturer of fourth vaccination: </label>
+    <select name="manufacturer4">
+      <option value="a">a</option>
+      <option value="b">b</option>
+      <option value="c">c</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Corona start date:</label>
+    <input type="date" name="startCoronaDate" />
+  </div>
+  <div class="form-group">
+    <label>recovery date</label>
+    <input type="date" name="recoveryCoronaDate" />
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<%- include("partials/footer") %>

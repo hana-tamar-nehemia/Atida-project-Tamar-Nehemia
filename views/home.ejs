@@ -1,0 +1,54 @@
+<%- include("partials/header") %>
+
+<div id="myChart" style="width: 100%; max-width: 600px; height: 500px"></div>
+<p>Number of people who not vaccinated: <%=numOfNotVaccinated%></p>
+
+<script>
+  //grahp
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(drawChart);
+
+  var arrayGraph = [
+    ["Price", "Size"],
+    [50, 7],
+  ];
+
+  function drawChart() {
+    // Set Data
+    const data = google.visualization.arrayToDataTable(arrayGraph);
+    // Set Options
+    const options = {
+      title: "positive per day",
+      hAxis: { title: "Day" },
+      vAxis: { title: "Amount" },
+      legend: "none",
+    };
+    // Draw
+    const chart = new google.visualization.LineChart(
+      document.getElementById("myChart")
+    );
+    chart.draw(data, options);
+  }
+  //add profile picture
+  const input = document.querySelector("input");
+  const output = document.querySelector("output");
+  let imagesArray = [];
+
+  input.addEventListener("change", () => {
+    const file = input.files;
+    imagesArray.push(file[0]);
+    displayImages();
+  });
+
+  function displayImages() {
+    let images = "";
+    imagesArray.forEach((image, index) => {
+      images += `<div class="image">
+                      <img src="${URL.createObjectURL(image)}" alt="image">
+                    </div>`;
+    });
+    output.innerHTML = images;
+  }
+</script>
+
+<%- include("partials/footer") %>
