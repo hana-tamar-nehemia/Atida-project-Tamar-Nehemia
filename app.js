@@ -11,10 +11,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
+// Connect to the MongoDB database
 mongoose.connect("mongodb://127.0.0.1:27017/atidaDB", {
   useNewUrlParser: true,
 });
 
+// Define the schema for user data
 const userDataSchema = {
   personalDetails: {
     name: {
@@ -62,48 +64,47 @@ const userDataSchema = {
     recoveryDate: Date,
   },
 };
-const arrayGraph = [["Price", "Size"]];
+
+// Create a model for the user data
 const User = mongoose.model("User", userDataSchema);
 
+//number of users who are not vaccinated
+var NotVaccinated = 0;
+
+// Declare variables for graph data
+var arrayGraph = [["Day", "People"]];
+
+// Handle GET requests to the home page
 app.get("/", async function (req, res) {
-  var NotVaccinated = 0;
-  var now = new Date();
-  const firstDay = new Date(now.getFullYear(), now.getMonth(), 2);
-  const dayNumber = now.getDate();
-
-  for (let i = 1; i <= dayNumber; i++) {
-    console.log(i);
-    await User.find({
-      "coronaInfo.positiveDate": {
-        $gte: new Date(now.getFullYear(), now.getMonth(), i + 1),
-        $lt: new Date(now.getFullYear(), now.getMonth(), i + 2),
-      },
-    }).then(async function (foundUsers) {
-      console.log(i);
-      await arrayGraph.push([i, foundUsers.length]);
-      console.log(arrayGraph);
+  // Call the notVaccinated function to get the number of people who haven't been vaccinated.
+  await notVaccinated();
+  // Find all users in the database and render
+  // the home page with the data
+  User.find({}).then(function (found) {
+    res.render("home", {
+      numOfNotVaccinated: NotVaccinated,
+      allUsers: found,
     });
-  }
-
-  await User.find({
-    "coronaInfo.vaccination1.date": null,
-    "coronaInfo.vaccination2.date": null,
-    "coronaInfo.vaccination3.date": null,
-    "coronaInfo.vaccination4.date": null,
-  })
-    .count()
-    .then(function (count) {
-      NotVaccinated = count;
-      console.log("NotVaccinated  " + count);
-      res.render("home", { numOfNotVaccinated: NotVaccinated });
-    });
+  });
 });
 
+// Handle GET requests to draw the graph
+app.get("/drawGraph", async function (req, res) {
+  // Call the drawGraph function to generate the graph data.
+  await drawGraph();
+  console.log(arrayGraph);
+  await res.send(arrayGraph);
+  arrayGraph = [["Day", "People"]];
+});
+
+// Handle GET requests to add a new user
 app.get("/addUser", function (req, res) {
   res.render("addUser", {});
 });
 
+// Handle POST requests to add a new user
 app.post("/addUser", function (req, res) {
+  // Create a new user object from the form data
   const newUser = new User({
     personalDetails: {
       name: req.body.userName,
@@ -139,27 +140,55 @@ app.post("/addUser", function (req, res) {
     },
   });
 
+  //save the new user to the database
   newUser.save();
   res.redirect("/");
 });
 
-app.post("/pullUser", function (res, req) {
-  User.findOne({ "personalDetails.id": req.body.user_id }).then(function (
-    err,
-    found
-  ) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(found);
-    }
+// Define a route to find a user by ID
+app.get("/pullUser/:id", function (req, res) {
+  // Find a user with the specified ID
+  User.findOne({
+    "personalDetails.id": req.query.id,
+  }).then(function (found) {
+    console.log(found);
+    res.send(found);
   });
-  res.redirect("/");
 });
 
-app.use("/sickArray", (req, res, next) => {
-  res.json(arrayGraph);
-});
+// find the number of positive cases per day
+async function drawGraph() {
+  var now = new Date();
+  const dayNumber = now.getDate();
+  for (let i = 1; i <= dayNumber; i++) {
+    // Find users with a positive COVID-19 test result on the current day
+    await User.find({
+      "coronaInfo.positiveDate": {
+        $gte: new Date(now.getFullYear(), now.getMonth(), i),
+        $lt: new Date(now.getFullYear(), now.getMonth(), i + 1),
+      },
+    }).then(async function (foundUsers) {
+      // Add the number of found users to the graph data
+      await arrayGraph.push([i, foundUsers.length]);
+    });
+  }
+}
+//count the number of users
+//who have not received any COVID-19 vaccinations
+async function notVaccinated() {
+  await User.find({
+    "coronaInfo.vaccination1.date": null,
+    "coronaInfo.vaccination2.date": null,
+    "coronaInfo.vaccination3.date": null,
+    "coronaInfo.vaccination4.date": null,
+  })
+    .count()
+    .then(function (count) {
+      // Set variable NotVaccinated to the count
+      // of unvaccinated users
+      NotVaccinated = count;
+    });
+}
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");

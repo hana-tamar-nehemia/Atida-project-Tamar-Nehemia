@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <title>Atida</title>
     <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -20,11 +22,11 @@
           <li id="addUser"><a href="/addUser">addUser</a></li>
           <li style="height: 50px;">
             <label  style="padding-top: 15px;" >
-              <input type="file" style="display: none;" accept="image/jpeg, image/png, image/jpg" />
+              <input id="inputPicture" type="file" style="display: none;" accept="image/jpeg, image/png, image/jpg" />
               <a >add your photo</a>
             </label>
          </li>
-          <li><output></output></li>
+          <li><output id="output"></output></li>
         </ul>
       </div>
     </nav>

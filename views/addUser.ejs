@@ -15,6 +15,7 @@
       class="form-control"
       name="userId"
       type="number"
+      maxlength="9"
       required
     />
   </div>
@@ -100,7 +101,9 @@
     <label>recovery date</label>
     <input type="date" name="recoveryCoronaDate" />
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button id="submitAddUser" type="submit" class="btn btn-primary">
+    Submit
+  </button>
 </form>
 
 <%- include("partials/footer") %>

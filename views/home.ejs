@@ -1,54 +1,113 @@
 <%- include("partials/header") %>
+<!-- search user -->
+<div style=" display: inline-block;">
+  <input type="text" id="idSearch">
+  <button id="search">search</button>
+  </div>
 
-<div id="myChart" style="width: 100%; max-width: 600px; height: 500px"></div>
-<p>Number of people who not vaccinated: <%=numOfNotVaccinated%></p>
+<!-- number of not vaccinated -->
+<div class="notVaccinated" >
+  <h4>Number of people who not vaccinated: <b> <%=numOfNotVaccinated%></b></h4>
+</div>
 
-<script>
-  //grahp
-  google.charts.load("current", { packages: ["corechart"] });
-  google.charts.setOnLoadCallback(drawChart);
+<!-- grahp -->
+<div
+  class="divBox"
+  id="myChart"
+  style=" height: 500px"
+></div>
 
-  var arrayGraph = [
-    ["Price", "Size"],
-    [50, 7],
-  ];
+<!-- list of users -->
+<div class="divBox" >
+  <table class="table">
+    <thead>
+      <tr>
+        <th  class="thTitle" scope="col">name</th>
+        <th  class="thTitle" scope="col">id</th>
+        <th  class="thTitle" scope="col">city</th>
+        <th  class="thTitle" scope="col">birth date</th>
+        <th  class="thTitle" scope="col">phone</th>
+        <th  class="thTitle" scope="col">positive day</th>
 
-  function drawChart() {
-    // Set Data
-    const data = google.visualization.arrayToDataTable(arrayGraph);
-    // Set Options
-    const options = {
-      title: "positive per day",
-      hAxis: { title: "Day" },
-      vAxis: { title: "Amount" },
-      legend: "none",
-    };
-    // Draw
-    const chart = new google.visualization.LineChart(
-      document.getElementById("myChart")
-    );
-    chart.draw(data, options);
-  }
-  //add profile picture
-  const input = document.querySelector("input");
-  const output = document.querySelector("output");
-  let imagesArray = [];
+      </tr>
+    </thead>
+    <tbody>
+      <% allUsers.forEach(function(user){%>
+      <tr>
+        <td>  <%=user.personalDetails.name %></td>
+        <td>  <%=user.personalDetails.id %></td>
+        <td>  <%=user.personalDetails.address.city %></td>
+        <td>  <%=user.personalDetails.dateOfBirth.toLocaleString().split(',')[0] %></td>
+        <td>  <%=user.personalDetails.cellPhoneNumber %></td>
+        <td>  <%=user.coronaInfo.positiveDate.toLocaleString().split(',')[0]  %></td>
 
-  input.addEventListener("change", () => {
-    const file = input.files;
-    imagesArray.push(file[0]);
-    displayImages();
-  });
+        <% }); %>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-  function displayImages() {
-    let images = "";
-    imagesArray.forEach((image, index) => {
-      images += `<div class="image">
-                      <img src="${URL.createObjectURL(image)}" alt="image">
-                    </div>`;
-    });
-    output.innerHTML = images;
-  }
-</script>
+<!-- ----------------------------script---------------------------------------- -->
 
-<%- include("partials/footer") %>
+    <script>
+
+      //Draw graph
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      $(window).on("load",function(){
+         $.get("/drawGraph", async function(data){
+          var arrayGraph = [ ];
+          console.log(data)
+          arrayGraph = data;
+          await drawChart(arrayGraph);
+        });
+      });
+     
+      function drawChart(arrayGraph) {
+        // Set Data
+        const data = google.visualization.arrayToDataTable(arrayGraph);
+        // Set Options
+        const options = {
+          title: "current month positive",
+          hAxis: { title: "Day" },
+          vAxis: { title: "People" },
+          legend: "none",
+        };
+        // Draw
+        const chart = new google.visualization.LineChart(
+          document.getElementById("myChart")
+        );
+        chart.draw(data, options);
+      }
+
+      //Add profile picture
+      const input = document.querySelector("#inputPicture");
+      const output = document.querySelector("#output");
+      let imagesArray = [];
+
+      input.addEventListener("change", () => {
+        const file = input.files;
+        imagesArray.push(file[0]);
+        displayImages();
+      });
+
+      function displayImages() {
+        let images = `<div class="image">
+                          <img src="${URL.createObjectURL(imagesArray[0])}" alt="image">
+                        </div>`;
+        output.innerHTML = images;
+      }
+
+      //Find user by id
+      $("#search").click(function(){
+         $.get("/pullUser/:id/?id=" + $('#idSearch').val(), function(data, status){
+          alert (JSON.stringify(data));
+        });
+      });
+
+    </script>
+
+    <%- include("partials/footer") %>
+  </div>
+</div>

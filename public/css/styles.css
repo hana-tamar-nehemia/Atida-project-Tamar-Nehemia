@@ -66,3 +66,18 @@ output .image img {
 #uploadPicture {
   display: none;
 }
+
+.divBox {
+  position: relative;
+  left: 150px;
+  max-width: 800px;
+  height: auto;
+  text-align: center;
+}
+.notVaccinated {
+  display: inline-block;
+  padding-left: 500px;
+}
+.thTitle {
+  text-align: center;
+}
