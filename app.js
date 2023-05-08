@@ -151,7 +151,6 @@ app.get("/pullUser/:id", function (req, res) {
   User.findOne({
     "personalDetails.id": req.query.id,
   }).then(function (found) {
-    console.log(found);
     res.send(found);
   });
 });
