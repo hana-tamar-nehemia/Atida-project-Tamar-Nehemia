@@ -48,8 +48,7 @@ to add user with Postman send a POST request on:  localhost:3000/addUser
 
 to pull user with Postman send a GET request on:  localhost:3000/pullUser/:id/
 
-![image](https://user-images.githubusercontent.com/73160604/236967739-649efa02-ae41-4a31-944a-f7a3dac47efb.png)
-
+<img width="440" alt="image" src="https://github.com/hana-tamar-nehemia/Atida-project-Tamar-Nehemia/assets/73160604/88a9dfd7-5aa4-457b-8426-b7744dd0c4f7">
 And it will console his detail
 
 <img width="311" alt="image" src="https://user-images.githubusercontent.com/73160604/236968428-7ad53c37-070f-49ae-b4fb-ff5df624e6cc.png">
