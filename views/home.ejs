@@ -32,16 +32,19 @@
       </tr>
     </thead>
     <tbody>
-      <% allUsers.forEach(function(user){%>
+      <% allUsers.forEach(function(user){ %>
       <tr>
         <td>  <%=user.personalDetails.name %></td>
         <td>  <%=user.personalDetails.id %></td>
         <td>  <%=user.personalDetails.address.city %></td>
         <td>  <%=user.personalDetails.dateOfBirth.toLocaleString().split(',')[0] %></td>
         <td>  <%=user.personalDetails.cellPhoneNumber %></td>
+        <%var positive = user.coronaInfo.positiveDate; %>
+        <% if(positive == null){ %>
+        <td> no date</td>
+          <% } else{%>
         <td>  <%=user.coronaInfo.positiveDate.toLocaleString().split(',')[0]  %></td>
-
-        <% }); %>
+        <% }}); %>
       </tr>
     </tbody>
   </table>
@@ -55,12 +58,16 @@
       google.charts.load("current", { packages: ["corechart"] });
       google.charts.setOnLoadCallback(drawChart);
 
+
       $(window).on("load",function(){
          $.get("/drawGraph", async function(data){
           var arrayGraph = [ ];
           console.log(data)
           arrayGraph = data;
           await drawChart(arrayGraph);
+
+          document.getElementsByClassName("myDropdown").selectedIndex = -1;
+
         });
       });
      

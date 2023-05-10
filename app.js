@@ -105,6 +105,7 @@ app.get("/addUser", function (req, res) {
 // Handle POST requests to add a new user
 app.post("/addUser", function (req, res) {
   // Create a new user object from the form data
+  console.log(req.body.manufacturer4);
   const newUser = new User({
     personalDetails: {
       name: req.body.userName,
