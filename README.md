@@ -39,7 +39,7 @@ to add user with Postman send a POST request on:  localhost:3000/addUser
 
 # pull user
 
-6. to search for a user enter the id
+6. to search for a user enter the id  and press "search"
 
 <img width="274" alt="image" src="https://user-images.githubusercontent.com/73160604/236965799-59212ef4-3f1d-45bf-bb87-ea149ab84786.png">
 
