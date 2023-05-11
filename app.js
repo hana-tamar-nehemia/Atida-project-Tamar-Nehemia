@@ -108,7 +108,7 @@ app.get("/addUser", function (req, res) {
 // Handle POST requests to add a new user
 app.post("/addUser", function (req, res) {
   // Create a new user object from the form data
-
+  // and dont save if the user already exist
   User.findOne({ "personalDetails.id": req.body.userId }).then(function (
     found
   ) {
