@@ -1,20 +1,12 @@
-# Atida-project-tamarNehemia
+# Atida-project-Tamar-Nehemia
 
-run mongo first:
 
-1. open Hyper and run "mongod"
+<img width="689" alt="image" src="https://github.com/hana-tamar-nehemia/Atida-project-Tamar-Nehemia/assets/73160604/8aef6bbb-cee2-4525-97e5-b1a19f0bcae1">
 
-<img width="300" alt="image" src="https://user-images.githubusercontent.com/73160604/236960850-fc66a4b3-8816-4187-985f-85101afc8bd6.png">
 
-2. open new tab in Hyper and run mongosh -> show dbs -> use atidaDB -> db.user.find()
+Scroll down to see running instructions
 
-run the project:
 
-1. open Hyper on the project folder and run "nodemon" or "node app.js"
-
-<img width="300" alt="image" src="https://user-images.githubusercontent.com/73160604/236960059-01c25c7c-bf99-4b16-85ca-808d20be5c27.png">
-
-2. open localhostlocal:3000 on the browser
 
 # add user
 
@@ -80,5 +72,23 @@ And it will appear
 
 <img width="430" alt="image" src="https://user-images.githubusercontent.com/73160604/236964990-83ff17b2-2bb3-4302-90de-2f489c4f3787.png">
 
+
+# running instructions
+
+run mongo first:
+
+1. open Hyper and run "mongod"
+
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/73160604/236960850-fc66a4b3-8816-4187-985f-85101afc8bd6.png">
+
+2. open new tab in Hyper and run mongosh -> show dbs -> use atidaDB -> db.user.find()
+
+run the project:
+
+1. open Hyper on the project folder and run "nodemon" or "node app.js"
+
+<img width="300" alt="image" src="https://user-images.githubusercontent.com/73160604/236960059-01c25c7c-bf99-4b16-85ca-808d20be5c27.png">
+
+2. open localhostlocal:3000 on the browser
 
 
