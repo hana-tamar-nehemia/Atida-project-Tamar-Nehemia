@@ -10,6 +10,10 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+// using ES6 import statement
+const createPrompt = require("prompt-sync");
+
+const prompt = createPrompt();
 
 // Connect to the MongoDB database
 mongoose.connect("mongodb://127.0.0.1:27017/atidaDB", {
@@ -92,7 +96,6 @@ app.get("/", async function (req, res) {
 app.get("/drawGraph", async function (req, res) {
   // Call the drawGraph function to generate the graph data.
   await drawGraph();
-  console.log(arrayGraph);
   await res.send(arrayGraph);
   arrayGraph = [["Day", "People"]];
 });
@@ -105,44 +108,51 @@ app.get("/addUser", function (req, res) {
 // Handle POST requests to add a new user
 app.post("/addUser", function (req, res) {
   // Create a new user object from the form data
-  console.log(req.body.manufacturer4);
-  const newUser = new User({
-    personalDetails: {
-      name: req.body.userName,
-      id: req.body.userId,
-      address: {
-        city: req.body.city,
-        street: req.body.street,
-        homeNumber: req.body.numberHome,
-      },
-      dateOfBirth: req.body.birthDate,
-      phoneNumber: req.body.phone,
-      cellPhoneNumber: req.body.cellPhone,
-    },
-    coronaInfo: {
-      vaccination1: {
-        date: req.body.DateVfvaccination1,
-        manufacturer: req.body.manufacturer1,
-      },
-      vaccination2: {
-        date: req.body.DateVfvaccination2,
-        manufacturer: req.body.manufacturer2,
-      },
-      vaccination3: {
-        date: req.body.DateVfvaccination3,
-        manufacturer: req.body.manufacturer3,
-      },
-      vaccination4: {
-        date: req.body.DateVfvaccination4,
-        manufacturer: req.body.manufacturer4,
-      },
-      positiveDate: req.body.startCoronaDate,
-      recoveryDate: req.body.recoveryCoronaDate,
-    },
-  });
 
-  //save the new user to the database
-  newUser.save();
+  User.findOne({ "personalDetails.id": req.body.userId }).then(function (
+    found
+  ) {
+    if (found == null) {
+      const newUser = new User({
+        personalDetails: {
+          name: req.body.userName,
+          id: req.body.userId,
+          address: {
+            city: req.body.city,
+            street: req.body.street,
+            homeNumber: req.body.numberHome,
+          },
+          dateOfBirth: req.body.birthDate,
+          phoneNumber: req.body.phone,
+          cellPhoneNumber: req.body.cellPhone,
+        },
+        coronaInfo: {
+          vaccination1: {
+            date: req.body.DateVfvaccination1,
+            manufacturer: req.body.manufacturer1,
+          },
+          vaccination2: {
+            date: req.body.DateVfvaccination2,
+            manufacturer: req.body.manufacturer2,
+          },
+          vaccination3: {
+            date: req.body.DateVfvaccination3,
+            manufacturer: req.body.manufacturer3,
+          },
+          vaccination4: {
+            date: req.body.DateVfvaccination4,
+            manufacturer: req.body.manufacturer4,
+          },
+          positiveDate: req.body.startCoronaDate,
+          recoveryDate: req.body.recoveryCoronaDate,
+        },
+      });
+      //save the new user to the database
+      newUser.save();
+    } else {
+      console.log("user id already exist!");
+    }
+  });
   res.redirect("/");
 });
 

@@ -109,7 +109,13 @@
       //Find user by id
       $("#search").click(function(){
          $.get("/pullUser/:id/?id=" + $('#idSearch').val(), function(data, status){
-          alert (JSON.stringify(data));
+          var parsedData = JSON.parse(JSON.stringify(data));
+          alert ("name:  " + parsedData.personalDetails.name +"\n"+
+          "id:  " + parsedData.personalDetails.id +"\n"+
+          "address:  " + parsedData.personalDetails.address.city +" "+
+          parsedData.personalDetails.address.street+" "+ parsedData.personalDetails.address.homeNumber +"\n"+
+          "date Of Birth:  " + parsedData.personalDetails.dateOfBirth.toLocaleString().split(',')[0] +"\n"+
+          "cell Phone Number:  " + parsedData.personalDetails.cellPhoneNumber +"\n" );
         });
       });
 
