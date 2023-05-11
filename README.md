@@ -14,9 +14,11 @@ Scroll down to see running instructions
 
 <img width="475" alt="image" src="https://user-images.githubusercontent.com/73160604/236961490-ac95c9d8-9309-4acb-92ae-fd88c2435f66.png">
 
+
 4.add user detail and submit
 
 <img width="509" alt="image" src="https://user-images.githubusercontent.com/73160604/236961838-585cf6c2-2702-4ae4-b92d-feb2331ce386.png">
+
 
 5. the user will add to the list in the home page
 
@@ -36,6 +38,7 @@ to add user with Postman send a POST request on:  localhost:3000/addUser
 <img width="274" alt="image" src="https://user-images.githubusercontent.com/73160604/236965799-59212ef4-3f1d-45bf-bb87-ea149ab84786.png">
 
 <img width="727" alt="image" src="https://github.com/hana-tamar-nehemia/Atida-project-Tamar-Nehemia/assets/73160604/44f068b5-33ec-46c8-9368-b9f2dc6ea564">
+
 
 
 
