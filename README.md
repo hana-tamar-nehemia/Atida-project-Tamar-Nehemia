@@ -79,6 +79,9 @@ And it will appear
 
 # running instructions
 
+the project run with Node.js and mongoDB and to simulate a client I used Postman.
+
+
 run mongo first:
 
 1. open Hyper and run "mongod" 
