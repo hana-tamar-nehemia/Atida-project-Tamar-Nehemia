@@ -35,8 +35,7 @@ to add user with Postman send a POST request on:  localhost:3000/addUser
 
 <img width="274" alt="image" src="https://user-images.githubusercontent.com/73160604/236965799-59212ef4-3f1d-45bf-bb87-ea149ab84786.png">
 
-<img width="583" alt="image" src="https://user-images.githubusercontent.com/73160604/236962729-5dccbe33-b100-4a08-b222-bcfacb1f5291.png">
-
+<img width="727" alt="image" src="https://github.com/hana-tamar-nehemia/Atida-project-Tamar-Nehemia/assets/73160604/44f068b5-33ec-46c8-9368-b9f2dc6ea564">
 
 to pull user with Postman send a GET request on:  localhost:3000/pullUser/:id/
 
