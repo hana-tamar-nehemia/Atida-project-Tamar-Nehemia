@@ -14,9 +14,11 @@ Scroll down to see running instructions
 
 <img width="475" alt="image" src="https://user-images.githubusercontent.com/73160604/236961490-ac95c9d8-9309-4acb-92ae-fd88c2435f66.png">
 
+
 4.add user detail and submit
 
 <img width="509" alt="image" src="https://user-images.githubusercontent.com/73160604/236961838-585cf6c2-2702-4ae4-b92d-feb2331ce386.png">
+
 
 5. the user will add to the list in the home page
 
@@ -35,7 +37,9 @@ to add user with Postman send a POST request on:  localhost:3000/addUser
 
 <img width="274" alt="image" src="https://user-images.githubusercontent.com/73160604/236965799-59212ef4-3f1d-45bf-bb87-ea149ab84786.png">
 
-<img width="583" alt="image" src="https://user-images.githubusercontent.com/73160604/236962729-5dccbe33-b100-4a08-b222-bcfacb1f5291.png">
+<img width="727" alt="image" src="https://github.com/hana-tamar-nehemia/Atida-project-Tamar-Nehemia/assets/73160604/44f068b5-33ec-46c8-9368-b9f2dc6ea564">
+
+
 
 
 to pull user with Postman send a GET request on:  localhost:3000/pullUser/:id/
@@ -77,18 +81,19 @@ And it will appear
 
 run mongo first:
 
-1. open Hyper and run "mongod"
+1. open Hyper and run "mongod" 
 
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/73160604/236960850-fc66a4b3-8816-4187-985f-85101afc8bd6.png">
 
-2. open new tab in Hyper and run mongosh -> show dbs -> use atidaDB -> db.user.find()
+2. open new tab in Hyper and run "mongosh"
+3. to go to the database continue: "show dbs" -> "use atidaDB" -> "db.user.find()"
 
-run the project:
+now run the project:
 
-1. open Hyper on the project folder and run "nodemon" or "node app.js"
+1. open Hyper (on the project folder)! and run "nodemon" or "node app.js"
 
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/73160604/236960059-01c25c7c-bf99-4b16-85ca-808d20be5c27.png">
 
-2. open localhostlocal:3000 on the browser
+2. open "localhostlocal:3000" on the browser
 
 
